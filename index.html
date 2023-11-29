@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2048 Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&family=Great+Vibes&family=Libre+Baskerville&family=Pixelify+Sans:wght@500&family=Playfair+Display:ital@1&family=Roboto+Slab:wght@200&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  
+    <style>
+        * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+}
+
+body {
+    background-color: #16252b; 
+}
+
+.heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.myhead{
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 100px;
+  color: white;
+  background-color: #16252b;
+  letter-spacing: 1px;
+  margin-bottom: 70px;
+  box-shadow: 0 4px 8px 0 rgba(0, 13, 255, 0.5), 0 6px 10px 0 rgb(255, 0, 251),0 6px 20px 0 rgb(0, 255, 170);
+
+}
+
+h1 {
+    color: #58a6ff;
+}
+
+.container {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+}
+
+h1 {
+    font-size: 4em;
+    color: #d9f0ff;
+}
+
+.score-container {
+    color: #d9f0ff; 
+}
+
+#score {
+    font-weight: 600;
+    color: #d9f0ff;
+}
+
+.grid {
+    width: 25em;
+    height: 25em;
+    background-color: #081c24; 
+    border: 5px solid #183d5d;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 0.5em;
+}
+
+.box {
+    width: 97.5px;
+    height: 97.5px;
+    border: 5px solid #667d92; 
+    font-size: 40px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cover-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #081c24;
+    background-image: url(https://www.svgrepo.com/show/284051/tetris.svg);
+    /* background-repeat: no-repeat;
+    background-size:cover; */
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#start-button {
+    
+    background-color: #005488; 
+    padding: 1em 2em;
+    border: none;
+    border-radius: 0.5em;
+    font-size: 1em;
+    letter-spacing: 0.2px;
+    color: #d9f0ff;
+    transition: 0.5s;
+}
+#checktherules {
+    
+    background-color: #005488; 
+    padding: 1em 2em;
+    margin-top: 20px;
+    border: none;
+    border-radius: 0.5em;
+    font-size: 1em;
+    letter-spacing: 0.2px;
+    color: #d9f0ff;
+    transition: 0.5s;
+}
+#checktherules:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 221, 255, 0.5), 0 6px 20px 0 rgba(0, 255, 238, 1);
+}
+
+#start-button:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 221, 255, 0.5), 0 6px 20px 0 rgba(0, 255, 238, 1);
+}
+
+.hide {
+    display: none;
+}
+
+.box-2 {
+    background-color: #bedfff; 
+    color: #081c24; 
+}
+
+.box-4 {
+    background-color: rgb(61, 128, 216); 
+    color: #081c24; 
+}
+
+.box-8 {
+    background-color: rgb(23, 97, 194); 
+    color: white;
+}
+
+.box-16 {
+    background-color: rgb(17, 71, 141);
+    color: white;
+}
+
+.box-32 {
+    background-color:rgb(177, 22, 224); 
+    color: white;
+}
+
+.box-64 {
+    background-color: rgb(81, 0, 156) ;
+    color: white;
+}
+
+.box-128 {
+    background-color: #9f2a97; 
+    color: white;
+}
+
+.box-256 {
+    background-color: #8412ab; 
+    color: white;
+}
+
+.box-512 {
+    background-color: #7e0062;
+    color: white;
+}
+
+.box-1024 {
+    background-color: #440071; 
+    color: white;
+}
+
+.box-2048 {
+    background-color: #8400ff; 
+    color: white;
+}
+
+
+    </style>
+  </head>
+  <body>
+    <div class="container hide">
+      <div class="heading">
+        <h1>2048</h1>
+        <div class="score-container">
+          Score:
+          <span id="score">0</span>
+        </div>
+      </div>
+      <div class="grid"></div>
+    </div>
+    
+    <div class="cover-screen">
+      <h2 id="over-text" class="hide" style="color: white;">Game Over</h2>
+      <p id="result" style="color: white;"></p>
+      <h1 class="myhead">2048 Game</h1>
+      <button id="start-button">Start Game</button>
+      <button id="checktherules">Check the Rules</button>
+      
+    </div>
+    
+    
+    
+    <script>
+        let grid = document.querySelector(".grid");
+        const startButton = document.getElementById("start-button");
+        const container = document.querySelector(".container");
+        const coverScreen = document.querySelector(".cover-screen");
+        const result = document.getElementById("result");
+        const overText = document.getElementById("over-text");
+        const rules=document.getElementById("checktherules");
+    rules.addEventListener("click",()=>{
+      window.open("about-the-game.html", "_blank");
+    });
+        
+
+let matrix,
+  score,
+  isSwiped,
+  touchY,
+  initialY = 0,
+  touchX,
+  initialX = 0,
+  rows = 4,
+  columns = 4,
+  swipeDirection;
+
+let rectLeft = grid.getBoundingClientRect().left;
+let rectTop = grid.getBoundingClientRect().top;
+
+const getXY = (e) => {
+  touchX = e.touches[0].pageX - rectLeft;
+  touchY = e.touches[0].pageY - rectTop;
+};
+
+const createGrid = () => {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < columns; j++) {
+      const boxDiv = document.createElement("div");
+      boxDiv.classList.add("box");
+      boxDiv.setAttribute("data-position", `${i}_${j}`);
+      grid.appendChild(boxDiv);
+    }
+  }
+};
+
+const adjacentCheck = (arr) => {
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] == arr[i + 1]) {
+      return true;
+    }
+  }
+  return false;
+};
+
+const possibleMovesCheck = () => {
+  for (let i in matrix) {
+    if (adjacentCheck(matrix[i])) {
+      return true;
+    }
+    let colarr = [];
+    for (let j = 0; j < columns; j++) {
+      colarr.push(matrix[i][j]);
+    }
+    if (adjacentCheck(colarr)) {
+      return true;
+    }
+  }
+  return false;
+};
+
+const randomPosition = (arr) => {
+  return Math.floor(Math.random() * arr.length);
+};
+
+const hasEmptyBox = () => {
+  for (let r in matrix) {
+    for (let c in matrix[r]) {
+      if (matrix[r][c] == 0) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
+
+const gameOverCheck = () => {
+  if (!possibleMovesCheck()) {
+    coverScreen.classList.remove("hide");
+    container.classList.add("hide");
+    overText.classList.remove("hide");
+    result.innerText = `Final score: ${score}`;
+    startButton.innerText = "Restart Game";
+  }
+};
+
+const generateTwo = () => {
+  if (hasEmptyBox()) {
+    let randomRow = randomPosition(matrix);
+    let randomCol = randomPosition(matrix[randomPosition(matrix)]);
+    if (matrix[randomRow][randomCol] == 0) {
+      matrix[randomRow][randomCol] = 2;
+      let element = document.querySelector(
+        `[data-position = '${randomRow}_${randomCol}']`
+      );
+      element.innerHTML = 2;
+      element.classList.add("box-2");
+    } else {
+      generateTwo();
+    }
+  } else {
+    gameOverCheck();
+  }
+};
+
+const generateFour = () => {
+  if (hasEmptyBox()) {
+    let randomRow = randomPosition(matrix);
+    let randomCol = randomPosition(matrix[randomPosition(matrix)]);
+    if (matrix[randomRow][randomCol] == 0) {
+      matrix[randomRow][randomCol] = 4;
+      let element = document.querySelector(
+        `[data-position= '${randomRow}_${randomCol}']`
+      );
+      element.innerHTML = 4;
+      element.classList.add("box-4");
+    } else {
+      generateFour();
+    }
+  } else {
+    gameOverCheck();
+  }
+};
+
+const removeZero = (arr) => arr.filter((num) => num);
+const checker = (arr, reverseArr = false) => {
+  arr = reverseArr ? removeZero(arr).reverse() : removeZero(arr);
+
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] == arr[i + 1]) {
+      arr[i] += arr[i + 1];
+      arr[i + 1] = 0;
+      score += arr[i];
+    }
+  }
+
+  arr = reverseArr ? removeZero(arr).reverse() : removeZero(arr);
+
+  let missingCount = 4 - arr.length;
+  while (missingCount > 0) {
+    if (reverseArr) {
+      arr.unshift(0);
+    } else {
+      arr.push(0);
+    }
+    missingCount -= 1;
+  }
+  return arr;
+};
+
+const slideDown = () => {
+  for (let i = 0; i < columns; i++) {
+    let num = [];
+    for (let j = 0; j < rows; j++) {
+      num.push(matrix[j][i]);
+    }
+    num = checker(num, true);
+    for (let j = 0; j < rows; j++) {
+      matrix[j][i] = num[j];
+      let element = document.querySelector(`[data-position='${j}_${i}']`);
+      element.innerHTML = matrix[j][i] ? matrix[j][i] : "";
+      element.classList.value = "";
+      element.classList.add("box", `box-${matrix[j][i]}`);
+    }
+  }
+
+  let decision = Math.random() > 0.5 ? 1 : 0;
+  if (decision) {
+    setTimeout(generateFour, 200);
+  } else {
+    setTimeout(generateTwo, 200);
+  }
+};
+
+const slideUp = () => {
+  for (let i = 0; i < columns; i++) {
+    let num = [];
+    for (let j = 0; j < rows; j++) {
+      num.push(matrix[j][i]);
+    }
+    num = checker(num);
+    for (let j = 0; j < rows; j++) {
+      matrix[j][i] = num[j];
+      let element = document.querySelector(`[data-position = '${j}_${i}']`);
+      element.innerHTML = matrix[j][i] ? matrix[j][i] : "";
+      element.classList.value = "";
+      element.classList.add("box", `box-${matrix[j][i]}`);
+    }
+  }
+  let decision = Math.random() > 0.5 ? 1 : 0;
+  if (decision) {
+    setTimeout(generateFour, 200);
+  } else {
+    setTimeout(generateTwo, 200);
+  }
+};
+
+const slideRight = () => {
+  for (let i = 0; i < rows; i++) {
+    let num = [];
+    for (let j = 0; j < columns; j++) {
+      num.push(matrix[i][j]);
+    }
+    num = checker(num, true);
+    for (let j = 0; j < columns; j++) {
+      matrix[i][j] = num[j];
+      let element = document.querySelector(`[data-position = '${i}_${j}']`);
+      element.innerHTML = matrix[i][j] ? matrix[i][j] : "";
+      element.classList.value = "";
+      element.classList.add("box", `box-${matrix[i][j]}`);
+    }
+  }
+  let decision = Math.random() > 0.5 ? 1 : 0;
+  if (decision) {
+    setTimeout(generateFour, 200);
+  } else {
+    setTimeout(generateTwo, 200);
+  }
+};
+
+const slideLeft = () => {
+  for (let i = 0; i < rows; i++) {
+    let num = [];
+    for (let j = 0; j < columns; j++) {
+      num.push(matrix[i][j]);
+    }
+
+    num = checker(num);
+    for (let j = 0; j < columns; j++) {
+      matrix[i][j] = num[j];
+      let element = document.querySelector(`[data-position = '${i}_${j}']`);
+      element.innerHTML = matrix[i][j] ? matrix[i][j] : "";
+      element.classList.value = "";
+      element.classList.add("box", `box-${matrix[i][j]}`);
+    }
+  }
+  let decision = Math.random() > 0.5 ? 1 : 0;
+  if (decision) {
+    setTimeout(generateFour, 200);
+  } else {
+    setTimeout(generateTwo, 200);
+  }
+};
+
+document.addEventListener("keyup", (e) => {
+  if (e.code == "ArrowLeft") {
+    slideLeft();
+  } else if (e.code == "ArrowRight") {
+    slideRight();
+  } else if (e.code == "ArrowUp") {
+    slideUp();
+  } else if (e.code == "ArrowDown") {
+    slideDown();
+  }
+  document.getElementById("score").innerText = score;
+});
+
+grid.addEventListener("touchstart", (event) => {
+  isSwiped = true;
+  getXY(event);
+  initialX = touchX;
+  initialY = touchY;
+});
+
+grid.addEventListener("touchmove", (event) => {
+  if (isSwiped) {
+    getXY(event);
+    let diffX = touchX - initialX;
+    let diffY = touchY - initialY;
+    if (Math.abs(diffY) > Math.abs(diffX)) {
+      swipeDirection = diffX > 0 ? "down" : "up";
+    } else {
+      swipeDirection = diffX > 0 ? "right" : "left";
+    }
+  }
+});
+
+grid.addEventListener("touchend", () => {
+  isSwiped = false;
+  let swipeCalls = {
+    up: slideUp,
+    down: slideDown,
+    left: slideLeft,
+    right: slideRight,
+  };
+  swipeCalls[swipeDirection]();
+  document.getElementById("score").innerText = score;
+});
+
+const startGame = () => {
+  score = 0;
+  document.getElementById("score").innerText = score;
+  grid.innerHTML = "";
+  matrix = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+  ];
+  container.classList.remove("hide");
+  coverScreen.classList.add("hide");
+  createGrid();
+  generateTwo();
+  generateTwo();
+};
+
+startButton.addEventListener("click", () => {
+  startGame();
+  swipeDirection = "";
+});
+    </script>
+  </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About the Game</title>
+    <style>
+        .rules-container {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .rules {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 80%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="rules-container">
+        <div class="rules">
+            <h1>About the Game</h1>
+            <p>2048 is a single-player sliding block puzzle game. The objective of the game is to slide numbered tiles on a grid to combine them and create a tile with the number 2048.</p>
+            <p>You can slide the tiles in four directions: up, down, left, and right. The tiles slide as far as possible in the chosen direction until they collide with another tile or the edge of the grid. If two tiles with the same number collide while sliding, they merge into a single tile with the sum of the numbers of the two tiles that collided. The newly formed tile remains in place while the other tiles continue to slide. The slide continues until no more tiles can move.</p>
+            <p>After each slide, a new tile with a value of 2 is randomly added to the grid. If there are any empty spots, the tile is added to one of them. The added tile only appears after the previous slide is completed. Once the game is won, no more new tiles will be added. To restart the game, you need to refresh the page.</p>
+        </div>
+    </div>
+    <script>
+        const rulesContainer = document.querySelector(".rules-container");
+        const startGameButton = document.getElementById("startGame");
+
+        startGameButton.addEventListener("click", () => {
+            rulesContainer.classList.add("hide");
+            startGame();
+            swipeDirection = "";
+        });
+
+        rulesContainer.classList.remove("hide");
+    </script>
+</body>
+</html>

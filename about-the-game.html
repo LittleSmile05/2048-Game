@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&family=Great+Vibes&family=Libre+Baskerville&family=Pixelify+Sans:wght@500&family=Playfair+Display:ital@1&family=Roboto+Slab:wght@200&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+    <style>
+        /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'); */
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #0e0848;
+            /* background-image: url(https://www.svgrepo.com/show/284051/tetris.svg); */
+            background-image: url(https://img.icons8.com/?size=512&id=C4gzrHvhdUDc&format=png);
+            
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        h1 {
+            margin: 10px;
+            text-align: center;
+            color: white;
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 50px;
+            letter-spacing: 5px;
+        }
+        .box {
+            /* background: url(https://source.unsplash.com/1600x900/?nature,water); */
+            background-color: #111131;
+            box-shadow: 0 4px 8px 0 rgba(0, 221, 255, 0.5), 0 6px 20px 0 rgba(0, 255, 238, 1);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 700px;
+            height: 350px;
+            margin: 10px;
+            border-radius: 6px;
+            box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.3);
+            transform: translateX(50%);
+            transition: transform 0.4s ease;
+            position: relative;
+            left: 0;
+        }
+        .box:nth-of-type(even) {
+            transform: translateX(-65%);
+            box-shadow: 0 4px 15px 0 rgba(0, 157, 255, 0.5), 0 6px 20px 0 rgb(247, 0, 255);
+            left: 150px;
+        }
+        .box:nth-of-type(odd) {
+            transform: translateX(-65%);
+            box-shadow: 0 4px 15px 0 rgba(0, 234, 255, 0.7), 0 6px 20px 0 rgb(230, 0, 255);
+            right: 150px;
+        }
+        .box.show {
+            transform: translateX(0);
+        }
+        .box h2 {
+            font-size: 18px;
+            width: 70%;
+            letter-spacing: 3.5px;
+        }
+
+        @media screen and (max-width: 600px) {
+            .box {
+                width: 70%; 
+                transform: translateX(0); 
+                height: 370px;
+                transform: translateX(50%);
+            transition: transform 0.4s ease;
+            box-shadow: 0 4px 8px 0 rgba(0, 221, 255, 0.5), 0 6px 20px 0 rgba(0, 255, 238, 1);
+                left: 0;
+                right: 0;
+            }
+            .box:nth-of-type(even) {
+                transform: translateX(-20%);
+                left: 0;
+            }
+            .box:nth-of-type(odd) {
+                transform: translateX(20%);
+                right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Game Rules</h1>
+    <div class="box"><h2><img height="200" style="filter:invert(); " src="https://logodix.com/logo/1649449.png" alt=""></h2></div>
+    <div class="box"><h2>2048 is a single-player sliding block puzzle game designed by Italian web developer Gabriele Cirulli. The game's objective is to slide numbered tiles on a grid to combine them and create a tile with the number 2048.</h2></div>
+    <div class="box"><img height="250" style="filter:invert(); " src="https://freesvg.org/img/2048.png" alt=""></div>
+    <div class="box"><h2>When you slide, all tiles on the grid will combine to create a new tile if they share the same number and are touching.
+        If two identical tiles are combined, they will create a new tile with the number twice as large as the original ones.</h2></div>
+    <!-- <div class="box"><h2>image</h2></div> -->
+    <div class="box"><h2>Every turn, a new tile with a value of either 2 or 4 will randomly appear on the grid.
+        If all positions on the grid are filled and no more moves can be made, the game is over.</h2></div>
+    <div class="box"><h2><img height="200" src="https://img.icons8.com/?size=512&id=38359&format=png" alt=""> Enjoy The Game!</h2></div>
+    <script>
+        const boxes = document.querySelectorAll('.box')
+        window.addEventListener('scroll', checkBoxes)
+        checkBoxes()
+        function checkBoxes() {
+            const triggerBottom = window.innerHeight / 5 * 4
+            boxes.forEach(box => {
+                const boxTop = box.getBoundingClientRect().top
+                if(boxTop < triggerBottom) {
+                    box.classList.add('show')
+                } else {
+                    box.classList.remove('show')
+                }
+            })
+        }
+    </script>
+</body>
+</html>
