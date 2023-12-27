@@ -45,6 +45,9 @@ Special thanks to the open-source community for providing valuable resources and
 Feel free to adapt the README file to fit the specific details of your 2048 game project. Include additional sections, such as a roadmap, known issues, or future enhancements, based on your project's needs.
 <img width="958" alt="2048game" src="https://github.com/LittleSmile05/2048-Game/assets/111835072/579e93bc-51fc-42aa-876c-915b8a34e95f">
 
+<img width="938" alt="image" src="https://github.com/LittleSmile05/2048-Game/assets/111835072/1d468f4d-8c6a-4cc7-84b3-31fac55e4985">
+
+
 ![WhatsApp Image 2023-11-27 at 14 28 44](https://github.com/LittleSmile05/2048-Game/assets/111835072/749b4a1e-120f-4c31-9581-3502970d313b)
 
 <img width="941" alt="image" src="https://github.com/LittleSmile05/2048-Game/assets/111835072/f986fd9f-8e7b-42c4-a849-33737417f2ad">
