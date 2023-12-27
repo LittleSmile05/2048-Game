@@ -1,4 +1,4 @@
-2048 Game
+<span style="font-size:larger;">2048 Game</span>
 
 Overview
 
