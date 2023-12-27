@@ -1,8 +1,11 @@
 2048 Game
+
 Overview
+
 2048 is a popular single-player sliding puzzle game where the goal is to combine tiles of the same value to reach the tile with the number 2048. The game is played on a 4x4 grid, and the player can move tiles in four directions: up, down, left, and right. New tiles with a value of 2 or 4 appear on the board after each move.
 
 Features
+
 Classic 2048 gameplay on a 4x4 grid.
 Responsive design for various screen sizes.
 Simple controls using arrow keys or swipe gestures.
@@ -41,4 +44,9 @@ The game logic is based on the original 2048 created by Gabriele Cirulli.
 Special thanks to the open-source community for providing valuable resources and inspiration.
 Feel free to adapt the README file to fit the specific details of your 2048 game project. Include additional sections, such as a roadmap, known issues, or future enhancements, based on your project's needs.
 <img width="958" alt="2048game" src="https://github.com/LittleSmile05/2048-Game/assets/111835072/579e93bc-51fc-42aa-876c-915b8a34e95f">
+
+![WhatsApp Image 2023-11-27 at 14 28 44](https://github.com/LittleSmile05/2048-Game/assets/111835072/749b4a1e-120f-4c31-9581-3502970d313b)
+
+<img width="941" alt="image" src="https://github.com/LittleSmile05/2048-Game/assets/111835072/f986fd9f-8e7b-42c4-a849-33737417f2ad">
+
 
